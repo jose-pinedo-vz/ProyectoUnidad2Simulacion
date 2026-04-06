@@ -29,7 +29,8 @@ def vaciar_datos():
 def creartabla(lista_datos, prom_ocio1, prom_ocio2, prom_ocio3, personasEnEspera):
     ventana_res = tk.Toplevel()
     ventana_res.title("Datos")
-    ventana_res.attributes("-zoomed", True)  # maximizada (en Linux usa: ventana_res.attributes("-zoomed", True))
+    try: ventana_res.state('zoomed')
+    except: ventana_res.attributes('-zoomed', True)  # maximizada (en Linux usa: ventana_res.attributes("-zoomed", True))
 
     ctk.CTkLabel(ventana_res, text=f"""     Promedio de hocio del cajero 1: {prom_ocio1} minutos \n
                                     Promedio de hocio del cajero 1: {prom_ocio2} minutos \n
