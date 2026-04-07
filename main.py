@@ -92,7 +92,7 @@ class InterfazPrincipal:
         self.Kolmogorov = ctk.CTkButton(self.frame_menu, text="Kolmogorov")
         self.Kolmogorov.pack(pady=20, padx=20)
 
-        self.Frecuencail = ctk.CTkButton(self.frame_menu, text="Frecuencail")
+        self.Frecuencail = ctk.CTkButton(self.frame_menu, text="Frecuencail", command=lambda: self.FrecuencailLlamada())
         self.Frecuencail.pack(pady=20, padx=20)
 
         self.Series = ctk.CTkButton(self.frame_menu, text="Series")
@@ -110,7 +110,32 @@ class InterfazPrincipal:
 
         lb_central = ctk.CTkLabel(self.frame_contenido, text="Cuadrados medios",
                                   font=("Arial", 18))
-        lb_central.grid(row=0, column=0, pady=10, padx=10, sticky="ew")
+        lb_central.place(x=50, y=50)
+
+        self.CantIteraciones = ctk.CTkEntry(self.frame_contenido, placeholder_text="Iteraciones",
+                                            width=400, height=120)
+        self.CantIteraciones.place(relx=0.2, rely=0.2, relwidth=0.25, anchor="center")
+
+        self.Semilla = ctk.CTkEntry(self.frame_contenido, placeholder_text="Semilla",
+                                    width=400, height=120)
+        self.Semilla.place(relx=0.5, rely=0.2, relwidth=0.25, anchor="center")
+
+        self.label = ctk.CTkLabel(self.frame_contenido, text="", font=("Arial", 13))
+        self.label.place(relx=0.5, rely=0.4, relwidth=0.6, relheight=0.5, anchor="n")
+
+        def llamarCuadrados():
+            semilla = self.Semilla.get()
+            nf = int(self.CantIteraciones.get())
+            import Cuadradosmedios
+
+            self.lista, resultado_cadena = Cuadradosmedios.cuadradosMedios(semilla, nf)
+
+            self.label.configure(text=f"{resultado_cadena}")
+
+        boton = ctk.CTkButton(self.frame_contenido, text="Generar",  width=400, height=120,
+                              command= llamarCuadrados)
+        
+        boton.place(relx=0.8, rely=0.2, relwidth=0.25, anchor="center")
 
     def Mixto(self):
         self.FrameDeLosGeneradores()
@@ -126,12 +151,41 @@ class InterfazPrincipal:
 
         lb_central = ctk.CTkLabel(self.frame_contenido, text="Congruencial multiplicativo",
                                   font=("Arial", 18))
-        lb_central.grid(row=0, column=0, pady=10, padx=10, sticky="ew")
+        lb_central.place(x=50, y=50)
+
+        self.CantIteraciones = ctk.CTkEntry(self.frame_contenido, placeholder_text="Iteraciones",
+                                            width=400, height=120)
+        self.CantIteraciones.place(relx=0.2, rely=0.2, relwidth=0.25, anchor="center")
+
+        self.Semilla = ctk.CTkEntry(self.frame_contenido, placeholder_text="Semilla",
+                                    width=400, height=120)
+        self.Semilla.place(relx=0.5, rely=0.2, relwidth=0.25, anchor="center")
+
+        self.label = ctk.CTkLabel(self.frame_contenido, text="", font=("Arial", 13))
+        self.label.place(relx=0.5, rely=0.4, relwidth=0.6, relheight=0.5, anchor="n")
+
+        def llamarCuadrados():
+            semilla = self.Semilla.get()
+            itera = int(self.CantIteraciones.get())
+            import congruencialMultiplicativo
+
+            cadena, self.lista = congruencialMultiplicativo.congruencial(semilla, itera)
+
+            self.label.configure(text=f"{cadena}")
+
+        boton = ctk.CTkButton(self.frame_contenido, text="Generar",  width=400, height=120,
+                              command= llamarCuadrados)
+        
+        boton.place(relx=0.8, rely=0.2, relwidth=0.25, anchor="center")
 
     def Esperas(self):
         import LIneasUI 
-
         LIneasUI.ventana()
+
+    def FrecuencailLlamada(self):
+        import frecuacia
+
+        frecuacia.frecuacual(self.lista)
         
 
 
